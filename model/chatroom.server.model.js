@@ -8,4 +8,4 @@ var exports = module.exports = {};
 exports.ChatRoomSchema = new Schema({
     chatRoom: String
 });
-exports.ChatRoomSchema = mongoose.model('ChatRoom', ChatRoomSchema);
+exports.ChatRoomSchema = mongoose.model('ChatRoom', exports.ChatRoomSchema);

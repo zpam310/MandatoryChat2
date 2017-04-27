@@ -8,4 +8,4 @@ exports.MessageSchema = new Schema({
     chatRoom: String,
     timeStamp: {type: Date, default: Date.now}
 });
-exports.ChatMessageSchema = mongoose.model('ChatMessage', MessageSchema);
+exports.ChatMessageSchema = mongoose.model('ChatMessage', exports.MessageSchema);

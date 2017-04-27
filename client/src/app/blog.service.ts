@@ -13,6 +13,7 @@ export class BlogService {
    * Get blog messages from server
    */
   getBlogs (): Observable<Blog[]> {
+
     return this.http.get(this.getBlogsUrl)
       .map(this.extractData)
       .catch(this.handleError);

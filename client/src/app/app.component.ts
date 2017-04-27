@@ -13,7 +13,7 @@ import { BlogService } from "./blog.service";
 export class AppComponent {
   isSubmitted: boolean = false;
   title = 'MEAN app with Angular2';
-  model = new Blog("", "");
+  model = new Blog("", "", "");
   public blogMessages = [];
 
   constructor (private http: Http, private blogService: BlogService) {}
@@ -22,7 +22,7 @@ export class AppComponent {
     this.blogService.addBlog(this.model)
       .subscribe(
         blogMsg => {
-          //console.log("Messages:",messages);
+          console.log("Messages:");
           this.model = blogMsg;
           this.getBlogs();
         },
@@ -35,7 +35,7 @@ export class AppComponent {
     this.blogService.getBlogs()
       .subscribe(
         messages => {
-          //console.log("Messages:",messages);
+          console.log("Messages:2");
           this.blogMessages = messages;
         },
         error =>  this.title = <any>error
