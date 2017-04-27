@@ -7,19 +7,19 @@
 <h2>Create new blog message</h2>
 <form (ngSubmit)="submitBlog()">
   <div class="form-group">
-    <label for="username">Author</label>
+    <label for="username">Username</label>
     <input type="text"  class="form-control" id="username"
            required
            [(ngModel)]="model.username" name="username">
   </div>
   <div class="form-group">
-    <label for="msg">Body</label>
+    <label for="msg">Msg</label>
     <input type="text" class="form-control" id="msg"
            required
            [(ngModel)]="model.msg" name="msg">
   </div>
   <div class="form-group">
-    <label for="chatRoom">Body</label>
+    <label for="chatRoom">Chatroom</label>
     <input type="text" class="form-control" id="chatRoom"
            required
            [(ngModel)]="model.chatRoom" name="chatRoom">
@@ -27,11 +27,11 @@
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
 
-<!--<hr>-->
+<hr>
 
-<!--<h2>All blog messages</h2>-->
-<!--<ul>-->
-  <!--<li *ngFor="let message of blogMessages">-->
-    <!--{{message.author}} : "{{message.body}}"-->
-  <!--</li>-->
-<!--</ul>-->
+<h2>All blog messages</h2>
+<ul>
+  <li *ngFor="let message of blogMessages">
+    {{message.username}} : "{{message.msg}}"
+  </li>
+</ul>
