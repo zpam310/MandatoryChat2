@@ -37,7 +37,7 @@ router.post('/post', function(req, res, next) {
     });
 });
 
-var message = [];
+/*var message = [];
 //router.locals.message = message;
 
 // Get og render chat view
@@ -85,6 +85,6 @@ router.post("/:chat", function (req, res) {
     });
 
     res.redirect(req.params["chat"]);
-});
+});*/
 
 module.exports = router;

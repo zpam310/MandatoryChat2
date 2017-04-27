@@ -42,8 +42,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app-root',
-            templateUrl: './app.component.html',
-            styleUrls: ['./app.component.css'],
+            templateUrl: 'blog.component.html',
+            styleUrls: ['blog.component.css'],
             providers: [blog_service_1.BlogService]
         })
     ], AppComponent);

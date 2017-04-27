@@ -5,12 +5,12 @@ import '../rxjs-operators';
 import { BlogService } from "./blog.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
+  selector: 'app-blog',
+  templateUrl: './blog.component.html',
+  styleUrls: ['./blog.component.css'],
   providers: [BlogService]
 })
-export class AppComponent {
+export class BlogComponent {
   isSubmitted: boolean = false;
   title = 'MEAN app with Angular2';
   model = new Blog("", "", "");
