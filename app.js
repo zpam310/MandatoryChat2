@@ -22,7 +22,6 @@ app.use(cookieParser());
 
 
 app.use('/blog', blog);
-app.use('/users', users);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'client/dist')));
 
