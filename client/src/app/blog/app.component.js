@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require('@angular/core');
 var blog_1 = require('./blog');
-require('./rxjs-operators');
+require('./../rxjs-operators');
 var blog_service_1 = require("./blog.service");
 var AppComponent = (function () {
     function AppComponent(http, blogService) {

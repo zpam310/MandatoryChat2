@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Blog } from './blog';
 import { Http, Response } from '@angular/http';
-import './rxjs-operators';
+import '../rxjs-operators';
 import { BlogService } from "./blog.service";
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.css'],
   providers: [BlogService]
 })
 export class AppComponent {
