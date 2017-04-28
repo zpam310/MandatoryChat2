@@ -7,10 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require('@angular/core');
 var blog_1 = require('./blog');
-require('./../rxjs-operators');
+require('../rxjs-operators');
 var blog_service_1 = require("./blog.service");
-var AppComponent = (function () {
-    function AppComponent(http, blogService) {
+var BlogComponent = (function () {
+    function BlogComponent(http, blogService) {
         this.http = http;
         this.blogService = blogService;
         this.isSubmitted = false;
@@ -18,7 +18,7 @@ var AppComponent = (function () {
         this.model = new blog_1.Blog("", "", "");
         this.blogMessages = [];
     }
-    AppComponent.prototype.submitBlog = function () {
+    BlogComponent.prototype.submitBlog = function () {
         var _this = this;
         this.blogService.addBlog(this.model)
             .subscribe(function (blogMsg) {
@@ -27,7 +27,7 @@ var AppComponent = (function () {
             _this.getBlogs();
         }, function (error) { return _this.title = error; });
     };
-    AppComponent.prototype.getBlogs = function () {
+    BlogComponent.prototype.getBlogs = function () {
         var _this = this;
         console.log("Subscribe to service");
         this.blogService.getBlogs()
@@ -36,17 +36,17 @@ var AppComponent = (function () {
             _this.blogMessages = messages;
         }, function (error) { return _this.title = error; });
     };
-    AppComponent.prototype.ngOnInit = function () {
+    BlogComponent.prototype.ngOnInit = function () {
         this.getBlogs();
     };
-    AppComponent = __decorate([
+    BlogComponent = __decorate([
         core_1.Component({
-            selector: 'app-root',
-            templateUrl: 'blog.component.html',
-            styleUrls: ['blog.component.css'],
+            selector: 'app-blog',
+            templateUrl: './blog.component.html',
+            styleUrls: ['./blog.component.css'],
             providers: [blog_service_1.BlogService]
         })
-    ], AppComponent);
-    return AppComponent;
+    ], BlogComponent);
+    return BlogComponent;
 }());
-exports.AppComponent = AppComponent;
+exports.BlogComponent = BlogComponent;
