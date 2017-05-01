@@ -6,20 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require('@angular/core');
-var rooms_service_1 = require("./rooms.service");
-var RoomsComponent = (function () {
-    function RoomsComponent() {
+var ChatComponent = (function () {
+    function ChatComponent() {
     }
-    RoomsComponent.prototype.ngOnInit = function () {
+    ChatComponent.prototype.ngOnInit = function () {
     };
-    RoomsComponent = __decorate([
+    ChatComponent = __decorate([
         core_1.Component({
-            selector: 'app-rooms',
-            templateUrl: './rooms.component.html',
-            styleUrls: ['./rooms.component.css'],
-            providers: [rooms_service_1.RoomsService]
+            selector: 'app-chat',
+            templateUrl: './chat.component.html',
+            styleUrls: ['./chat.component.css']
         })
-    ], RoomsComponent);
-    return RoomsComponent;
+    ], ChatComponent);
+    return ChatComponent;
 }());
-exports.RoomsComponent = RoomsComponent;
+exports.ChatComponent = ChatComponent;

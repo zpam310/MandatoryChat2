@@ -13,7 +13,7 @@ var database = require('../model/database');
 // router.locals.userIsCreated = userIsCreated;
 
 // Henter og rendere new user viewet
-router.get("/new-user/get", function (req, res) {
+router.get("/get", function (req, res) {
     console.log("sdsd");
 });
 router.post("/", function (req, res) {

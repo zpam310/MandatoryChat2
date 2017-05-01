@@ -10,10 +10,16 @@ var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
 var app_component_1 = require('./app.component');
-var blog_component_1 = require('./blog/blog.component');
 var rooms_component_1 = require('./rooms/rooms.component');
 var new_user_component_1 = require('./new-user/new-user.component');
-var app_router_1 = require('./app.router');
+var router_1 = require('@angular/router');
+var chat_component_1 = require('./chat/chat.component');
+var router = [
+    { path: '', component: app_component_1.AppComponent },
+    { path: 'new-user', component: new_user_component_1.NewUserComponent },
+    { path: 'chat', component: chat_component_1.ChatComponent },
+    { path: 'rooms', component: rooms_component_1.RoomsComponent }
+];
 var AppModule = (function () {
     function AppModule() {
     }
@@ -21,15 +27,15 @@ var AppModule = (function () {
         core_1.NgModule({
             declarations: [
                 app_component_1.AppComponent,
-                blog_component_1.BlogComponent,
                 rooms_component_1.RoomsComponent,
-                new_user_component_1.NewUserComponent
+                new_user_component_1.NewUserComponent,
+                chat_component_1.ChatComponent
             ],
             imports: [
+                router_1.RouterModule.forRoot(router, { useHash: true }),
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
-                app_router_1.routes
             ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]

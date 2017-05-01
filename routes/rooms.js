@@ -8,7 +8,7 @@ var database = require('../model/database');
 
 
 // Henter alle mine rooms
-router.get("/rooms", function (req, res) {
+router.get("/get", function (req, res) {
     console.log("Martin");
     if (req.session.user == undefined) {
         res.redirect("/new-user");

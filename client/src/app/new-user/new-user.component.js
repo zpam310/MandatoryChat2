@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require('@angular/core');
+var new_user_service_1 = require('./new-user.service');
 var NewUserComponent = (function () {
     function NewUserComponent() {
     }
@@ -15,7 +16,8 @@ var NewUserComponent = (function () {
         core_1.Component({
             selector: 'app-new-user',
             templateUrl: './new-user.component.html',
-            styleUrls: ['./new-user.component.css']
+            styleUrls: ['./new-user.component.css'],
+            providers: [new_user_service_1.NewUserService]
         })
     ], NewUserComponent);
     return NewUserComponent;

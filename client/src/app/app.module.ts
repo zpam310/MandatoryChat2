@@ -4,23 +4,30 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { BlogComponent } from './blog/blog.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { NewUserComponent } from './new-user/new-user.component';
-import { routes } from './app.router';
+import { Routes, RouterModule } from '@angular/router';
+import { ChatComponent } from './chat/chat.component';
+
+const router: Routes = [
+  { path: '', component: AppComponent },
+  { path: 'new-user', component: NewUserComponent },
+  { path: 'chat', component: ChatComponent },
+  { path: 'rooms', component: RoomsComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    BlogComponent,
     RoomsComponent,
-    NewUserComponent
+    NewUserComponent,
+    ChatComponent
   ],
   imports: [
+    RouterModule.forRoot(router, {useHash: true}),
     BrowserModule,
     FormsModule,
     HttpModule,
-    routes
   ],
   providers: [],
   bootstrap: [AppComponent]
