@@ -11,7 +11,7 @@ import { NewUserComponent } from './new-user/new-user.component';
 export const router: Routes = [
     { path: '', redirectTo: '/', pathMatch: 'full' },
     { path: 'rooms', component: RoomsComponent },
-    { path: 'newuser', component: NewUserComponent }
+    { path: '', component: NewUserComponent }
 ];
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);
