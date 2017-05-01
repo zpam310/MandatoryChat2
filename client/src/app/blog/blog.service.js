@@ -8,22 +8,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
+var io = require('socket.io-client');
 var BlogService = (function () {
     function BlogService(http) {
         this.http = http;
         this.getBlogsUrl = 'blog/get'; // URL to web API
         this.postBlogUrl = 'blog/post'; // URL to web API
+        this.url = window.location.origin;
     }
     /*
      * Get blog messages from server
      */
     BlogService.prototype.getBlogs = function () {
-        return this.http.get(this.getBlogsUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
+        var _this = this;
+        var observable = new Observable_1.Observable(function (observer) {
+            console.log("Socket:", _this.url);
+            _this.socket = io(_this.url);
+            _this.socket.on('refresh', function (data) {
+                observer.next(data);
+            });
+            return function () {
+                _this.socket.disconnect();
+            };
+        });
+        return observable;
     };
     /*
-     * Send blog meassge to server
+     * Send blog message to server
      */
     BlogService.prototype.addBlog = function (blog) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
