@@ -29,6 +29,7 @@ export class RoomsComponent implements OnInit {
         );
     return this.rooms;
   }
+
   addRooms() {
     this.resetModel(this.model, this.model.chatRoom);
     this.service.addRooms(this.model)

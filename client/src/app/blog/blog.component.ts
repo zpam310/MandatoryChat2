@@ -45,6 +45,7 @@ export class BlogComponent {
       );
   }
 
+
   ngOnInit() {
       this.route.params.subscribe((params: Params)=> {
           this.specificRoom = params['specificRoom'];

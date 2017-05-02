@@ -21,7 +21,7 @@ export class BlogService {
         .map(this.extractData)
         .catch(this.handleError);
   }
-
+//DETTE SKAL ÆNDRES NÆSTE GANG
   /*getBlogs (roomName): Observable<Blog[]> {
     let observable = new Observable(observer => {
       console.log("Socket:",this.url);

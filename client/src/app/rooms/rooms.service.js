@@ -11,7 +11,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
-var io = require('socket.io-client');
 var RoomsService = (function () {
     function RoomsService(http) {
         this.http = http;
@@ -22,19 +21,24 @@ var RoomsService = (function () {
     /*
      * Get users from server
      */
-    RoomsService.prototype.getRooms = function () {
-        var _this = this;
-        var observable = new Observable_1.Observable(function (observer) {
-            console.log("Socket:", _this.url);
-            _this.socket = io(_this.url);
-            _this.socket.on('refresh', function (data) {
+    /*getRooms (): Observable<Rooms[]> {
+        let observable = new Observable(observer => {
+            console.log("Socket:",this.url);
+            this.socket = io(this.url);
+            this.socket.on('refresh', (data) => {
                 observer.next(data);
             });
-            return function () {
-                _this.socket.disconnect();
+
+            return () => {
+                this.socket.disconnect();
             };
         });
         return observable;
+    }*/
+    RoomsService.prototype.getRooms = function () {
+        return this.http.get(this.getRoomsUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
     };
     /*
      * Send user message to server

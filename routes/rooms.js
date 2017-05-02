@@ -4,17 +4,14 @@
 var express = require('express');
 var router = express.Router();
 var database = require('../model/database');
-const ChatRoomSchema = require('../model/chatroom.server.model');
+const chatRoomSchema = require('../model/chatroom.server.model');
 
 
 /* POST */
 router.post ('/post', function (req, res, next) {
-    var instance = new ChatRoomSchema.ChatRoomSchema(req.body)
-    /** Example post body:
-     {
-       "chatRoom": "name",
-     }
-     **/
+    var instance = new chatRoomSchema.ChatRoomSchema(req.body)
+
+
     instance.save(function (err, chatRoomName) {
         result = err?err:chatRoomName;
         res.send(result);
@@ -23,7 +20,9 @@ router.post ('/post', function (req, res, next) {
 });
 router.get ('/get', function (req, res) {
     console.log("HELLO");
-    ChatRoomSchema.ChatRoomSchema.find({}).exec(function (err, chat) {
+
+
+    chatRoomSchema.ChatRoomSchema.find({}).exec(function (err, chat) {
         if (err)
             return console.error(err);
         console.log("Load success: ", chat);
@@ -33,7 +32,7 @@ router.get ('/get', function (req, res) {
 
 /* GET */
 router.get ('/get/:room', function (req, res, next) {
-    ChatRoomSchema.ChatRoomSchema.find({chatRoom: req.params["room"]}, function (err, chat) {
+    chatRoomSchema.ChatRoomSchema.find({chatRoom: req.params["room"]}, function (err, chat) {
         if (err) {
             console.log(err);
             res.send(err);
@@ -41,6 +40,8 @@ router.get ('/get/:room', function (req, res, next) {
         res.send(chat);
     });
 });
+
+
 /* Notify blog messages to connected clients */
 router.clients = [];
 router.addClient = function (client) {

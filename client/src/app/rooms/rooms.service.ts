@@ -18,7 +18,7 @@ export class RoomsService {
     /*
      * Get users from server
      */
-    getRooms (): Observable<Rooms[]> {
+    /*getRooms (): Observable<Rooms[]> {
         let observable = new Observable(observer => {
             console.log("Socket:",this.url);
             this.socket = io(this.url);
@@ -31,7 +31,14 @@ export class RoomsService {
             };
         });
         return observable;
+    }*/
+
+    getRooms (): Observable<Rooms[]> {
+        return this.http.get(this.getRoomsUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
     }
+
 
     /*
      * Send user message to server
