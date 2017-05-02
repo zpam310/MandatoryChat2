@@ -11,22 +11,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
+var io = require('socket.io-client');
 var RoomsService = (function () {
     function RoomsService(http) {
         this.http = http;
         this.getRoomsUrl = '/rooms/get'; // URL to web API
         this.postRoomsUrl = '/rooms/post'; // URL to web API
+        this.url = window.location.origin;
     }
     /*
-     * Get Rooms from server
+     * Get users from server
      */
     RoomsService.prototype.getRooms = function () {
-        return this.http.get(this.getRoomsUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
+        var _this = this;
+        var observable = new Observable_1.Observable(function (observer) {
+            console.log("Socket:", _this.url);
+            _this.socket = io(_this.url);
+            _this.socket.on('refresh', function (data) {
+                observer.next(data);
+            });
+            return function () {
+                _this.socket.disconnect();
+            };
+        });
+        return observable;
     };
     /*
-     * Send rooms to server
+     * Send user message to server
      */
     RoomsService.prototype.addRooms = function (rooms) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });

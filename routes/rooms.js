@@ -10,7 +10,7 @@ var database = require('../model/database');
 
 /* POST */
 router.post ('/post', function (req, res, next) {
-    var instance = new messageSchema.ChatMessageSchema({chatRoom: req.body.chatRoomName})
+    var instance = new messageSchema.ChatMessageSchema(req.body)
         /** Example post body:
          {
            "chatRoom": "name",
