@@ -7,12 +7,11 @@ import { AppComponent } from './app.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { Routes, RouterModule } from '@angular/router';
-import { ChatComponent } from './chat/chat.component';
+import { BlogComponent } from './blog/blog.component';
 
 const router: Routes = [
-  { path: '', component: AppComponent },
-  { path: 'new-user', component: NewUserComponent },
-  { path: 'chat', component: ChatComponent },
+  { path: '', component: NewUserComponent },
+  { path: 'blog', component: BlogComponent },
   { path: 'rooms', component: RoomsComponent }
 ];
 
@@ -21,7 +20,7 @@ const router: Routes = [
     AppComponent,
     RoomsComponent,
     NewUserComponent,
-    ChatComponent
+    BlogComponent
   ],
   imports: [
     RouterModule.forRoot(router, {useHash: true}),
