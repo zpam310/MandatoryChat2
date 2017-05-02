@@ -3,3 +3,12 @@
 </p>
 
 <h1>USERS</h1>
+<form (ngSubmit)="addNewUser()">
+  <div class="form-group">
+    <label for="username">Username:</label>
+    <input type="text"  class="form-control" id="username"
+           required
+           [(ngModel)]="model.username" name="username">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>

@@ -2,11 +2,52 @@
  * Created by Tobias on 27-04-2017.
  */
 const ChatRoom = require("../model/chatroom.server.model");
+const messageSchema = require('../model/message.server.model');
 var express = require('express');
 var router = express.Router();
 var database = require('../model/database');
 
 
+/* POST */
+router.post ('/post', function (req, res, next) {
+    var instance = new messageSchema.ChatMessageSchema({chatRoom: req.body.chatRoomName})
+        /** Example post body:
+         {
+           "chatRoom": "name",
+         }
+         **/
+        instance.save(function (err, chatRoomName) {
+        result = err?err:chatRoomName;
+        res.send(result);
+        return result;
+    });
+});
+
+/* GET */
+router.get ('/:room', function (req, res, next) {
+    ChatRoom.ChatRoomSchema.find({}).exec(function (err, rooms) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        }
+        messageSchema.ChatMessageSchema.find({chatRoom: req.params["room"]}, function (err, messages) {
+            if (err) {
+                console.log(err);
+                res.send(err);
+            }
+            res.render("room", {
+                chatRoomName: req.params["room"],
+                allMessages: messages,
+                allRooms: rooms
+            });
+        });
+    });
+});
+
+
+
+
+/*
 // Henter alle mine rooms
 router.get("/get", function (req, res) {
     console.log("Martin");
@@ -52,6 +93,6 @@ router.post("/create-chat-room", function (req, res) {
         res.redirect("/rooms");
     });
 
-});
+});*/
 
 module.exports = router;

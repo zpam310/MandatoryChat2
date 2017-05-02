@@ -5,25 +5,38 @@ import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { NewUser }           from './new-user';
 import { Observable }     from 'rxjs/Observable';
+import * as io from 'socket.io-client';
 
 @Injectable()
 export class NewUserService {
     private getNewUserUrl = '/new-user/get';  // URL to web API
     private postNewUserUrl = '/new-user/post';  // URL to web API
     constructor (private http: Http) {}
+    private socket;
+    private url = window.location.origin;
+
+
 
     /*
-     * Get New User messages from server
+     * Get users from server
      */
     getNewUser (): Observable<NewUser[]> {
+        let observable = new Observable(observer => {
+            console.log("Socket:",this.url);
+            this.socket = io(this.url);
+            this.socket.on('refresh', (data) => {
+                observer.next(data);
+            });
 
-        return this.http.get(this.getNewUserUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
+            return () => {
+                this.socket.disconnect();
+            };
+        });
+        return observable;
     }
 
     /*
-     * Send New user meassge to server
+     * Send user message to server
      */
     addNewUser (newUser: NewUser): Observable<NewUser> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -56,3 +69,4 @@ export class NewUserService {
         return Observable.throw(errMsg);
     }
 }
+

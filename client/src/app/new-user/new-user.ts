@@ -3,7 +3,6 @@
  */
 export class NewUser {
     constructor(
-        public username: String
-    ) {  }
+        public username: String) {}
 }
 
