@@ -3,6 +3,7 @@ import { Blog } from './blog';
 import { Http, Response } from '@angular/http';
 import '../rxjs-operators';
 import { BlogService } from "./blog.service";
+import { Router, ActivatedRoute, Params} from '@angular/router'
 
 @Component({
   selector: 'app-blog',
@@ -14,25 +15,27 @@ export class BlogComponent {
   isSubmitted: boolean = false;
   title = 'MEAN app with Angular2';
   model = new Blog("", "", "");
+  specificRoom: string;
   public blogMessages = [];
 
-  constructor (private http: Http, private blogService: BlogService) {}
+  constructor (private http: Http, private blogService: BlogService, private route: ActivatedRoute) {}
 
   submitBlog() {
-    this.blogService.addBlog(this.model)
+      this.model = new Blog(this.model.msg, this.model.username, this.specificRoom)
+       this.blogService.addBlog(this.model)
       .subscribe(
         blogMsg => {
           console.log("Messages:");
           this.model = blogMsg;
-          this.getBlogs();
+          this.getBlogs(this.specificRoom);
         },
         error =>  this.title = <any>error
       );
   }
 
-  getBlogs() {
+  getBlogs(roomName) {
     console.log("Subscribe to service");
-    this.blogService.getBlogs()
+    this.blogService.getBlogs(roomName)
       .subscribe(
         messages => {
           console.log("Messages:2");
@@ -43,7 +46,10 @@ export class BlogComponent {
   }
 
   ngOnInit() {
-    this.getBlogs();
+      this.route.params.subscribe((params: Params)=> {
+          this.specificRoom = params['specificRoom'];
+      });
+    this.getBlogs(this.specificRoom);
   }
 
 }

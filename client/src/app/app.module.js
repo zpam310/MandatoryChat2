@@ -17,6 +17,7 @@ var blog_component_1 = require('./blog/blog.component');
 var router = [
     { path: '', component: new_user_component_1.NewUserComponent },
     { path: 'blog', component: blog_component_1.BlogComponent },
+    { path: 'rooms/:specificRoom', component: blog_component_1.BlogComponent },
     { path: 'rooms', component: rooms_component_1.RoomsComponent }
 ];
 var AppModule = (function () {

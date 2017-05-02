@@ -10,11 +10,7 @@ const UserSchema = require('../model/user.server.model');
 /* POST */
 router.post ('/post', function (req, res, next) {
     var instance = new UserSchema.User(req.body);
-    /** Example post body:
-     {
-       "username": "name",
-     }
-     **/
+
     instance.save(function (err, User) {
         result = err?err:User;
         res.send(result);
@@ -26,8 +22,8 @@ router.post ('/post', function (req, res, next) {
 router.get ('/get', function (req, res, next) {
     UserSchema.User.find({}).exec(function (err, users) {
         if(err)
-            return console.error(err)
-        console.log("load success", users)
+            return console.error(err);
+        console.log("load success", users);
         res.send(users)
     });
 });
@@ -52,58 +48,4 @@ router.notifyclients = function (client) {
 
 
 //export the router
-module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// var entries = [];
-// router.locals.entries = entries;
-//
-// var userIsCreated = 0;
-// router.locals.userIsCreated = userIsCreated;
-
-// Henter og rendere new user viewet
-/*
-router.get("/get", function (req, res) {
-    console.log("sdsd");
-});
-router.post("/", function (req, res) {
-    userIsCreated = 0;
-    if (!req.body.name) {
-        return;
-    }
-    else {
-        for (i = 0; i < entries.length; i++) {
-
-            if (entries[i]['name'] == req.body.name) {
-                userIsCreated = 1;
-                break;
-            }
-        }
-    }
-    if (userIsCreated == 0) {
-        req.session.user = req.body.name;
-        entries.push({
-            name: req.body.name
-        });
-        res.redirect("/rooms");
-    } else {
-        res.status(400).send("Name is already in use");
-        return;
-    }
-});
-*/
-
 module.exports = router;

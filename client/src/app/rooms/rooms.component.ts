@@ -15,6 +15,7 @@ export class RoomsComponent implements OnInit {
   title = 'MEAN app with Angular2';
   model = new Rooms("");
 
+
   constructor (private service: RoomsService) {}
 
   getRooms() {

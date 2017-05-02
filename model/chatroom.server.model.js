@@ -6,6 +6,12 @@ var Schema = mongoose.Schema;
 var exports = module.exports = {};
 
 exports.ChatRoomSchema = new Schema({
-    chatRoom: String
+    chatRoom: {
+        type: String,
+        unique: true,
+        required: true
+    }
+
 });
 exports.ChatRoomSchema = mongoose.model('ChatRoom', exports.ChatRoomSchema);
+

@@ -10,9 +10,10 @@ var blog_1 = require('./blog');
 require('../rxjs-operators');
 var blog_service_1 = require("./blog.service");
 var BlogComponent = (function () {
-    function BlogComponent(http, blogService) {
+    function BlogComponent(http, blogService, route) {
         this.http = http;
         this.blogService = blogService;
+        this.route = route;
         this.isSubmitted = false;
         this.title = 'MEAN app with Angular2';
         this.model = new blog_1.Blog("", "", "");
@@ -20,24 +21,29 @@ var BlogComponent = (function () {
     }
     BlogComponent.prototype.submitBlog = function () {
         var _this = this;
+        this.model = new blog_1.Blog(this.model.msg, this.model.username, this.specificRoom);
         this.blogService.addBlog(this.model)
             .subscribe(function (blogMsg) {
             console.log("Messages:");
             _this.model = blogMsg;
-            _this.getBlogs();
+            _this.getBlogs(_this.specificRoom);
         }, function (error) { return _this.title = error; });
     };
-    BlogComponent.prototype.getBlogs = function () {
+    BlogComponent.prototype.getBlogs = function (roomName) {
         var _this = this;
         console.log("Subscribe to service");
-        this.blogService.getBlogs()
+        this.blogService.getBlogs(roomName)
             .subscribe(function (messages) {
             console.log("Messages:2");
             _this.blogMessages = messages;
         }, function (error) { return _this.title = error; });
     };
     BlogComponent.prototype.ngOnInit = function () {
-        this.getBlogs();
+        var _this = this;
+        this.route.params.subscribe(function (params) {
+            _this.specificRoom = params['specificRoom'];
+        });
+        this.getBlogs(this.specificRoom);
     };
     BlogComponent = __decorate([
         core_1.Component({

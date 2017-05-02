@@ -12,6 +12,7 @@ import { BlogComponent } from './blog/blog.component';
 const router: Routes = [
   { path: '', component: NewUserComponent },
   { path: 'blog', component: BlogComponent },
+  { path: 'rooms/:specificRoom', component: BlogComponent },
   { path: 'rooms', component: RoomsComponent }
 ];
 
