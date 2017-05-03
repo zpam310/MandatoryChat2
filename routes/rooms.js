@@ -5,6 +5,8 @@ var express = require('express');
 var router = express.Router();
 var database = require('../model/database');
 const chatRoomSchema = require('../model/chatroom.server.model');
+const messageSchema = require('../model/message.server.model');
+
 
 
 /* POST */
@@ -32,7 +34,7 @@ router.get ('/get', function (req, res) {
 
 /* GET */
 router.get ('/get/:room', function (req, res, next) {
-    chatRoomSchema.ChatRoomSchema.find({chatRoom: req.params["room"]}, function (err, chat) {
+    messageSchema.ChatMessageSchema.find({chatRoom: req.params["room"]}, function (err, chat) {
         if (err) {
             console.log(err);
             res.send(err);

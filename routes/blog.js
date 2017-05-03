@@ -16,7 +16,16 @@ router.get('/get', function(req, res, next) {
     });
 
 });
+/* GET all blog messages */
+router.get('rooms/get', function(req, res, next) {
+    messageSchema.ChatMessageSchema.find({}).exec(function (err, blogs) {
+        if (err)
+            return console.error(err);
+        console.log("Load success: ", blogs);
+        res.send(blogs);
+    });
 
+});
 
 /* POST single blog post */
 router.post('/post', function(req, res, next) {

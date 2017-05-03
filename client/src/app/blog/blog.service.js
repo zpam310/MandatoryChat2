@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
+var io = require('socket.io-client');
 var BlogService = (function () {
     function BlogService(http) {
         this.http = http;
@@ -18,27 +19,30 @@ var BlogService = (function () {
     /*
      * Get blog messages from server
      */
-    BlogService.prototype.getBlogs = function (roomName) {
-        this.getBlogsUrl = this.getBlogsUrl + "/" + roomName;
-        return this.http.get(this.getBlogsUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
+    /*
+    getBlogs(roomName): Observable<Blog[]> {
+      console.log("GETOUT");
+      this.getBlogsUrl = this.getBlogsUrl + "/" + roomName
+      return this.http.get(this.getBlogsUrl)
+          .map(this.extractData)
+          .catch(this.handleError);
+    }
+    */
     //DETTE SKAL ÆNDRES NÆSTE GANG
-    /*getBlogs (roomName): Observable<Blog[]> {
-      let observable = new Observable(observer => {
-        console.log("Socket:",this.url);
-        this.socket = io(this.url);
-        this.socket.on('refresh', (data) => {
-          observer.next(data);
+    BlogService.prototype.getBlogs = function (roomName) {
+        var _this = this;
+        var observable = new Observable_1.Observable(function (observer) {
+            console.log("Socket:", _this.url);
+            _this.socket = io(_this.url);
+            _this.socket.on('refresh', function (data) {
+                observer.next(data);
+            });
+            return function () {
+                _this.socket.disconnect();
+            };
         });
-  
-        return () => {
-          this.socket.disconnect();
-        };
-      });
-      return observable;
-    }*/
+        return observable;
+    };
     /*
      * Send blog message to server
      */

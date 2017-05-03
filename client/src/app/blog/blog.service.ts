@@ -2,6 +2,7 @@ import { Injectable }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Blog }           from './blog';
 import { Observable }     from 'rxjs/Observable';
+import * as io from 'socket.io-client';
 
 @Injectable()
 export class BlogService {
@@ -15,14 +16,18 @@ export class BlogService {
    * Get blog messages from server
    */
 
+
+  /*
   getBlogs(roomName): Observable<Blog[]> {
+    console.log("GETOUT");
     this.getBlogsUrl = this.getBlogsUrl + "/" + roomName
     return this.http.get(this.getBlogsUrl)
         .map(this.extractData)
         .catch(this.handleError);
   }
+  */
 //DETTE SKAL ÆNDRES NÆSTE GANG
-  /*getBlogs (roomName): Observable<Blog[]> {
+  getBlogs (roomName): Observable<Blog[]> {
     let observable = new Observable(observer => {
       console.log("Socket:",this.url);
       this.socket = io(this.url);
@@ -35,7 +40,7 @@ export class BlogService {
       };
     });
     return observable;
-  }*/
+  }
 
   /*
    * Send blog message to server
