@@ -1,8 +1,10 @@
 <p>
   new-user works!
 </p>
-
-<h1>USERS</h1>
+<div class="row loginBlock">
+  <div class="col-md-12 col-sm-12">
+  <h1>TESAMI chat</h1>
+  <p>Select your username to chat with</p>
 <form (ngSubmit)="addNewUser()">
   <div class="form-group">
     <label for="username">Username:</label>
@@ -10,5 +12,7 @@
            required
            [(ngModel)]="model.username" name="username">
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+  <button type="submit" class="btn btn-success btn-style">Submit</button>
 </form>
+</div>
+</div>
