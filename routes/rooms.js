@@ -12,6 +12,8 @@ const messageSchema = require('../model/message.server.model');
 /* POST */
 router.post ('/post', function (req, res, next) {
     var instance = new chatRoomSchema.ChatRoomSchema(req.body)
+    console.log("roompostrouter" + req.body);
+
 
 
     instance.save(function (err, chatRoomName) {

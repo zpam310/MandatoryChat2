@@ -12,28 +12,26 @@ var io = require('socket.io-client');
 var BlogService = (function () {
     function BlogService(http) {
         this.http = http;
-        this.getBlogsUrl = 'blog/get'; // URL to web API
+        this.getBlogsUrl = 'rooms/get'; // URL to web API
         this.postBlogUrl = 'blog/post'; // URL to web API
         this.url = window.location.origin;
     }
     /*
      * Get blog messages from server
      */
-    /*
-    getBlogs(roomName): Observable<Blog[]> {
-      console.log("GETOUT");
-      this.getBlogsUrl = this.getBlogsUrl + "/" + roomName
-      return this.http.get(this.getBlogsUrl)
-          .map(this.extractData)
-          .catch(this.handleError);
-    }
-    */
+    /*getBlogs(roomName): Observable<Blog[]> {
+       console.log("GETOUT");
+       this.getBlogsUrl = this.getBlogsUrl + "/" + roomName
+       return this.http.get(this.getBlogsUrl)
+           .map(this.extractData)
+           .catch(this.handleError);
+     }*/
     //DETTE SKAL ÆNDRES NÆSTE GANG
-    BlogService.prototype.getBlogs = function (roomName) {
+    BlogService.prototype.getBlogs = function (specificRoom) {
         var _this = this;
         var observable = new Observable_1.Observable(function (observer) {
-            console.log("Socket:", _this.url);
-            _this.socket = io(_this.url);
+            console.log("Socket:", _this.url + "/#/rooms/" + specificRoom);
+            _this.socket = io(_this.url + "/#/rooms/" + specificRoom);
             _this.socket.on('refresh', function (data) {
                 observer.next(data);
             });
@@ -49,6 +47,7 @@ var BlogService = (function () {
     BlogService.prototype.addBlog = function (blog) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
+        console.log("addBlog");
         return this.http.post(this.postBlogUrl, blog, options)
             .map(this.extractData)
             .catch(this.handleError);

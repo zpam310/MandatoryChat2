@@ -18,7 +18,9 @@ export class BlogComponent {
   specificRoom: string;
   public blogMessages = [];
 
-  constructor (private http: Http, private blogService: BlogService, private route: ActivatedRoute) {}
+  constructor (private http: Http,
+               private blogService: BlogService,
+               private route: ActivatedRoute) {}
 
   submitBlog() {
       this.model = new Blog(this.model.msg, this.model.username, this.specificRoom)
@@ -33,16 +35,16 @@ export class BlogComponent {
       );
   }
 
-  getBlogs(roomName) {
-    console.log("Subscribe to service");
-    this.blogService.getBlogs(roomName)
+  getBlogs(specificRoom) {
+    console.log("TESTTHISSHIIIT" + this.specificRoom);
+    this.blogService.getBlogs(specificRoom)
       .subscribe(
         messages => {
-          console.log("Messages:2");
           this.blogMessages = messages;
         },
         error =>  this.title = <any>error
       );
+    return this.blogMessages;
   }
 
 

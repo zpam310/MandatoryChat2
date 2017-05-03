@@ -6,7 +6,7 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class BlogService {
-  private getBlogsUrl = 'blog/get';  // URL to web API
+  private getBlogsUrl = 'rooms/get';  // URL to web API
   private postBlogUrl = 'blog/post';  // URL to web API
   constructor (private http: Http) {}
   private socket;
@@ -17,20 +17,20 @@ export class BlogService {
    */
 
 
-  /*
-  getBlogs(roomName): Observable<Blog[]> {
+
+ /*getBlogs(roomName): Observable<Blog[]> {
     console.log("GETOUT");
     this.getBlogsUrl = this.getBlogsUrl + "/" + roomName
     return this.http.get(this.getBlogsUrl)
         .map(this.extractData)
         .catch(this.handleError);
-  }
-  */
+  }*/
+
 //DETTE SKAL ÆNDRES NÆSTE GANG
-  getBlogs (roomName): Observable<Blog[]> {
+  getBlogs (specificRoom): Observable<Blog[]> {
     let observable = new Observable(observer => {
-      console.log("Socket:",this.url);
-      this.socket = io(this.url);
+      console.log("Socket:",this.url + "/#/rooms/" + specificRoom);
+      this.socket = io(this.url + "/#/rooms/" + specificRoom);
       this.socket.on('refresh', (data) => {
         observer.next(data);
       });
@@ -48,7 +48,7 @@ export class BlogService {
   addBlog (blog: Blog): Observable<Blog> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-
+  console.log("addBlog");
     return this.http.post(this.postBlogUrl, blog, options)
         .map(this.extractData)
         .catch(this.handleError);

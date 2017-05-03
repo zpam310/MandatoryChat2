@@ -29,14 +29,14 @@ var BlogComponent = (function () {
             _this.getBlogs(_this.specificRoom);
         }, function (error) { return _this.title = error; });
     };
-    BlogComponent.prototype.getBlogs = function (roomName) {
+    BlogComponent.prototype.getBlogs = function (specificRoom) {
         var _this = this;
-        console.log("Subscribe to service");
-        this.blogService.getBlogs(roomName)
+        console.log("TESTTHISSHIIIT" + this.specificRoom);
+        this.blogService.getBlogs(specificRoom)
             .subscribe(function (messages) {
-            console.log("Messages:2");
             _this.blogMessages = messages;
         }, function (error) { return _this.title = error; });
+        return this.blogMessages;
     };
     BlogComponent.prototype.ngOnInit = function () {
         var _this = this;

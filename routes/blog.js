@@ -16,21 +16,20 @@ router.get('/get', function(req, res, next) {
     });
 
 });
-/* GET all blog messages */
-router.get('rooms/get', function(req, res, next) {
-    messageSchema.ChatMessageSchema.find({}).exec(function (err, blogs) {
-        if (err)
-            return console.error(err);
-        console.log("Load success: ", blogs);
-        res.send(blogs);
+router.get ('/get/:room', function (req, res, next) {
+    messageSchema.ChatMessageSchema.find({chatRoom: req.params["room"]}, function (err, chat) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        }
+        res.send(chat);
     });
-
 });
 
 /* POST single blog post */
 router.post('/post', function(req, res, next) {
     var instance = new messageSchema.ChatMessageSchema(req.body);
-
+    console.log("blogpostrouter" + req.body);
     instance.save(function (err, Blog) {
         result = err?err:Blog;
         res.send(result);
