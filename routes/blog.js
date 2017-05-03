@@ -45,8 +45,9 @@ router.addClient = function (client) {
     router.clients.push(client);
     router.notifyclients(client);
 };
-router.notifyclients = function (client) {
-    messageSchema.ChatMessageSchema.find({}).exec(function (err, blogs) {
+router.notifyclients = function (client, chatroom) {
+    messageSchema.ChatMessageSchema.find({ chatRoom: chatroom }).exec(function (err, blogs) {
+        console.log(blogs);
         if (err)
             return console.error(err);
         //console.log("Load success: ", blogs);

@@ -37,7 +37,7 @@ export class BlogComponent {
 
   getBlogs(specificRoom) {
     console.log("TESTTHISSHIIIT" + this.specificRoom);
-    this.blogService.getBlogs(specificRoom)
+      this.blogService.getBlogs(specificRoom)
       .subscribe(
         messages => {
           this.blogMessages = messages;

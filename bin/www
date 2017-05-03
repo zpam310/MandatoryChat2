@@ -79,7 +79,10 @@ server.on('error', onError);
 io.on('connection', function (socket) {
     console.log("New client connected");
     blog.addClient(socket);
-    blog.notifyclients();
+    socket.on("send specific room", function(data) {
+        blog.notifyclients(null, data);
+        console.log('clients notified: ', data)
+    });
 });
 server.on('listening', onListening);
 

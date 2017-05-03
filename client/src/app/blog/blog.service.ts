@@ -18,7 +18,7 @@ export class BlogService {
 
 
 
- /*getBlogs(roomName): Observable<Blog[]> {
+/* getBlogs(roomName): Observable<Blog[]> {
     console.log("GETOUT");
     this.getBlogsUrl = this.getBlogsUrl + "/" + roomName
     return this.http.get(this.getBlogsUrl)
@@ -30,7 +30,9 @@ export class BlogService {
   getBlogs (specificRoom): Observable<Blog[]> {
     let observable = new Observable(observer => {
       console.log("Socket:",this.url + "/#/rooms/" + specificRoom);
-      this.socket = io(this.url + "/#/rooms/" + specificRoom);
+      this.socket = io(this.url);
+      this.socket.emit('send specific room', specificRoom);
+
       this.socket.on('refresh', (data) => {
         observer.next(data);
       });

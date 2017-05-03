@@ -19,19 +19,20 @@ var BlogService = (function () {
     /*
      * Get blog messages from server
      */
-    /*getBlogs(roomName): Observable<Blog[]> {
-       console.log("GETOUT");
-       this.getBlogsUrl = this.getBlogsUrl + "/" + roomName
-       return this.http.get(this.getBlogsUrl)
-           .map(this.extractData)
-           .catch(this.handleError);
-     }*/
+    /* getBlogs(roomName): Observable<Blog[]> {
+        console.log("GETOUT");
+        this.getBlogsUrl = this.getBlogsUrl + "/" + roomName
+        return this.http.get(this.getBlogsUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+      }*/
     //DETTE SKAL ÆNDRES NÆSTE GANG
     BlogService.prototype.getBlogs = function (specificRoom) {
         var _this = this;
         var observable = new Observable_1.Observable(function (observer) {
             console.log("Socket:", _this.url + "/#/rooms/" + specificRoom);
-            _this.socket = io(_this.url + "/#/rooms/" + specificRoom);
+            _this.socket = io(_this.url);
+            _this.socket.emit('send specific room', specificRoom);
             _this.socket.on('refresh', function (data) {
                 observer.next(data);
             });
