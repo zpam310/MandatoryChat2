@@ -1,3 +1,5 @@
+<div class="container">
+
 <p>
   rooms works!
 </p>
@@ -11,8 +13,14 @@
 </div>
 <button type="submit" class="btn btn-default">Submit</button>
 </form>
-<ul>
-  <li *ngFor="let room of rooms">
-   <a [routerLink]="[room.chatRoom]" routerLinkActive="active">{{room.chatRoom}}</a>
-  </li>
-</ul>
+  <br>
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let room of rooms">
+      <a [routerLink]="[room.chatRoom]" routerLinkActive="active">
+        <div class="tile purple">
+          <h3 class="title">{{room.chatRoom}}</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
