@@ -10,7 +10,7 @@ const UserSchema = require('../model/user.server.model');
 /* POST */
 router.post ('/post', function (req, res, next) {
     var instance = new UserSchema.User(req.body);
-
+    req.session.username = req.body.username;
     instance.save(function (err, User) {
         result = err?err:User;
         res.send(result);

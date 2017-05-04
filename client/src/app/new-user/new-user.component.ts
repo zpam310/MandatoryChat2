@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewUserService } from './new-user.service'
 import { NewUser } from "./new-user";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-user',
@@ -30,7 +31,7 @@ export class NewUserComponent implements OnInit {
     return this.users;
   }
   addNewUser() {
-    this.resetModel(this.model, this.model.username);
+    //this.resetModel(this.model, this.model.username);
     this.service.addNewUser(this.model)
         .subscribe(
             Newuser => {
@@ -39,6 +40,7 @@ export class NewUserComponent implements OnInit {
             },
             error => this.title = <any>error
         );
+    //this.router.navigate([./rooms])
   }
 
   resetModel(userModel, userModelUsername) {

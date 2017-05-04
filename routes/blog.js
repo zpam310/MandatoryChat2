@@ -28,7 +28,9 @@ router.get ('/get/:room', function (req, res, next) {
 
 /* POST single blog post */
 router.post('/post', function(req, res, next) {
+    req.body.username = req.session.username;
     var instance = new messageSchema.ChatMessageSchema(req.body);
+
     console.log("blogpostrouter" + req.body);
     instance.save(function (err, Blog) {
         result = err?err:Blog;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Blog } from './blog';
 import { Http, Response } from '@angular/http';
 import '../rxjs-operators';
@@ -11,20 +11,21 @@ import { Router, ActivatedRoute, Params} from '@angular/router'
   styleUrls: ['./blog.component.css'],
   providers: [BlogService]
 })
-export class BlogComponent {
-  isSubmitted: boolean = false;
+export class BlogComponent implements OnInit{
   title = 'MEAN app with Angular2';
   model = new Blog("", "", "");
   specificRoom: string;
   public blogMessages = [];
 
   constructor (private http: Http,
-               private blogService: BlogService,
+               private service: BlogService,
                private route: ActivatedRoute) {}
 
   submitBlog() {
-      this.model = new Blog(this.model.msg, this.model.username, this.specificRoom)
-       this.blogService.addBlog(this.model)
+
+      this.model = new Blog(this.model.username, this.model.msg, this.specificRoom);
+      console.log(this.model);
+       this.service.addBlog(this.model)
       .subscribe(
         blogMsg => {
           console.log("Messages:");
@@ -37,16 +38,15 @@ export class BlogComponent {
 
   getBlogs(specificRoom) {
     console.log("TESTTHISSHIIIT" + this.specificRoom);
-      this.blogService.getBlogs(specificRoom)
+      this.service.getBlogs(specificRoom)
       .subscribe(
         messages => {
           this.blogMessages = messages;
         },
-        error =>  this.title = <any>error
+        error =>  this.blogMessages = <any>error
       );
     return this.blogMessages;
   }
-
 
   ngOnInit() {
       this.route.params.subscribe((params: Params)=> {

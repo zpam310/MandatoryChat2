@@ -10,12 +10,6 @@
 <h2>Create new blog message</h2>
 <form (ngSubmit)="submitBlog()">
   <div class="form-group">
-    <label for="username">Username</label>
-    <input type="text"  class="form-control" id="username"
-           required
-           [(ngModel)]="model.username" name="username">
-  </div>
-  <div class="form-group">
     <label for="msg">Msg</label>
     <input type="text" class="form-control" id="msg"
            required
@@ -27,8 +21,15 @@
 <hr>
 
 <h2>All blog messages</h2>
-<ul>
+<div #scrollMe class="panel-body">
+<ul class="chat">
   <li *ngFor="let message of blogMessages">
-    {{message.username}} : "{{message.msg}}"
+      <div class="chat-body clearfix">
+        <div class="header">
+          <strong class="primary-font">{{ message.username }}</strong>
+        </div>
+        <p>{{message.msg}}</p>
+      </div>
   </li>
 </ul>
+</div>
