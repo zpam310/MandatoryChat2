@@ -5,7 +5,8 @@
   "scripts": {
     "prepare": "node -e \"console.log(child_process.execSync(os.type()==='Windows_NT'?'npm.cmd install':'npm install', {cwd: 'client'}).toString('utf8'))\"",
     "build": "node -e \"console.log(child_process.execSync(os.type()==='Windows_NT'?'ng.cmd build --watch false --output-path dist':'ng build --watch false --output-path dist', {cwd: 'client'}).toString('utf8'))\"",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "node ./node_modules/mocha/bin/mocha"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.0",
@@ -38,6 +39,7 @@
   "devDependencies": {
     "concurrently": "^2.0.0",
     "lite-server": "^2.2.0",
+    "mocha": "^3.3.0",
     "typescript": "^1.8.10",
     "typings": "^0.8.1"
   }
