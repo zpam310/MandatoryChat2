@@ -18,6 +18,15 @@ var BlogComponent = (function () {
         this.model = new blog_1.Blog("", "", "");
         this.blogMessages = [];
     }
+    BlogComponent.prototype.ngAfterViewChecked = function () {
+        this.scrollToBottom();
+    };
+    BlogComponent.prototype.scrollToBottom = function () {
+        try {
+            this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+        }
+        catch (err) { }
+    };
     BlogComponent.prototype.submitBlog = function () {
         var _this = this;
         this.model = new blog_1.Blog(this.model.username, this.model.msg, this.specificRoom);
@@ -45,6 +54,9 @@ var BlogComponent = (function () {
         });
         this.getBlogs(this.specificRoom);
     };
+    __decorate([
+        core_1.ViewChild('scrollMe')
+    ], BlogComponent.prototype, "myScrollContainer", void 0);
     BlogComponent = __decorate([
         core_1.Component({
             selector: 'app-blog',
