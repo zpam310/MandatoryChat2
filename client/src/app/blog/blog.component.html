@@ -1,35 +1,30 @@
-<p>blog works!</p>
-<h1>
-  {{title}}
-</h1>
 
-
-
-<hr>
-
-<h2>Create new blog message</h2>
-<form (ngSubmit)="submitBlog()">
-  <div class="form-group">
-    <label for="msg">Msg</label>
-    <input type="text" class="form-control" id="msg"
-           required
-           [(ngModel)]="model.msg" name="msg">
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
-
-<hr>
-
-<h2>All blog messages</h2>
+<div class="container">
+  <div class="row"><a class="btn btn-dark btn-lg" routerLink="/rooms">Back to Chatrooms</a></div>
+  <h2>All chat messages</h2>
 <div #scrollMe class="panel-body">
-<ul class="chat">
-  <li *ngFor="let message of blogMessages">
+  <ul class="chat">
+    <li *ngFor="let message of blogMessages">
       <div class="chat-body clearfix">
         <div class="header">
           <strong class="primary-font">{{ message.username }}</strong>
         </div>
         <p>{{message.msg}}</p>
       </div>
-  </li>
-</ul>
+    </li>
+  </ul>
 </div>
+<hr>
+<h2>Create new chat message</h2>
+<form (ngSubmit)="submitBlog()">
+  <div class="form-group">
+    <label for="msg">Msg</label>
+    <input type="text" autocomplete="off" class="form-control" id="msg"
+           required
+           [(ngModel)]="model.msg" name="msg">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+</div>
+
+
