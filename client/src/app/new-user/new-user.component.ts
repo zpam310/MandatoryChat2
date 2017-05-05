@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewUserService } from './new-user.service'
 import { NewUser } from "./new-user";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-user',
@@ -17,7 +17,7 @@ export class NewUserComponent implements OnInit {
   title = 'MEAN app with Angular2';
   model = new NewUser("");
 
-  constructor (private service: NewUserService) {}
+  constructor (private service: NewUserService, private route: ActivatedRoute, private router: Router) {}
 
   getNewUser() {
     this.service.getNewUser()
@@ -40,7 +40,7 @@ export class NewUserComponent implements OnInit {
             },
             error => this.title = <any>error
         );
-    //this.router.navigate([./rooms])
+    this.router.navigate(["rooms"])
   }
 
   resetModel(userModel, userModelUsername) {

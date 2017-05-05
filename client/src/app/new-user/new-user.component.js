@@ -9,8 +9,10 @@ var core_1 = require('@angular/core');
 var new_user_service_1 = require('./new-user.service');
 var new_user_1 = require("./new-user");
 var NewUserComponent = (function () {
-    function NewUserComponent(service) {
+    function NewUserComponent(service, route, router) {
         this.service = service;
+        this.route = route;
+        this.router = router;
         this.users = [];
         this.userList = this.users;
         this.title = 'MEAN app with Angular2';
@@ -27,12 +29,13 @@ var NewUserComponent = (function () {
     };
     NewUserComponent.prototype.addNewUser = function () {
         var _this = this;
-        this.resetModel(this.model, this.model.username);
+        //this.resetModel(this.model, this.model.username);
         this.service.addNewUser(this.model)
             .subscribe(function (Newuser) {
             _this.model = Newuser;
             _this.getNewUser();
         }, function (error) { return _this.title = error; });
+        this.router.navigate(["rooms"]);
     };
     NewUserComponent.prototype.resetModel = function (userModel, userModelUsername) {
         userModel = new new_user_1.NewUser(userModelUsername);

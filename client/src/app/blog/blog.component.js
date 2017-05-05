@@ -10,19 +10,19 @@ var blog_1 = require('./blog');
 require('../rxjs-operators');
 var blog_service_1 = require("./blog.service");
 var BlogComponent = (function () {
-    function BlogComponent(http, blogService, route) {
+    function BlogComponent(http, service, route) {
         this.http = http;
-        this.blogService = blogService;
+        this.service = service;
         this.route = route;
-        this.isSubmitted = false;
         this.title = 'MEAN app with Angular2';
         this.model = new blog_1.Blog("", "", "");
         this.blogMessages = [];
     }
     BlogComponent.prototype.submitBlog = function () {
         var _this = this;
-        this.model = new blog_1.Blog(this.model.msg, this.model.username, this.specificRoom);
-        this.blogService.addBlog(this.model)
+        this.model = new blog_1.Blog(this.model.username, this.model.msg, this.specificRoom);
+        console.log(this.model);
+        this.service.addBlog(this.model)
             .subscribe(function (blogMsg) {
             console.log("Messages:");
             _this.model = blogMsg;
@@ -32,10 +32,10 @@ var BlogComponent = (function () {
     BlogComponent.prototype.getBlogs = function (specificRoom) {
         var _this = this;
         console.log("TESTTHISSHIIIT" + this.specificRoom);
-        this.blogService.getBlogs(specificRoom)
+        this.service.getBlogs(specificRoom)
             .subscribe(function (messages) {
             _this.blogMessages = messages;
-        }, function (error) { return _this.title = error; });
+        }, function (error) { return _this.blogMessages = error; });
         return this.blogMessages;
     };
     BlogComponent.prototype.ngOnInit = function () {
