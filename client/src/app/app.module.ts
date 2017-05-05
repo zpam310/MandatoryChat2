@@ -8,12 +8,15 @@ import { RoomsComponent } from './rooms/rooms.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { Routes, RouterModule } from '@angular/router';
 import { BlogComponent } from './blog/blog.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const router: Routes = [
   { path: '', component: NewUserComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'rooms/:specificRoom', component: BlogComponent },
-  { path: 'rooms', component: RoomsComponent }
+  { path: 'rooms', component: RoomsComponent },
+  { path: 'welcome', component: WelcomeComponent }
+
 ];
 
 @NgModule({
@@ -21,7 +24,8 @@ const router: Routes = [
     AppComponent,
     RoomsComponent,
     NewUserComponent,
-    BlogComponent
+    BlogComponent,
+    WelcomeComponent
   ],
   imports: [
     RouterModule.forRoot(router, {useHash: true}),

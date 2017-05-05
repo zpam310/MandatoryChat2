@@ -14,11 +14,13 @@ var rooms_component_1 = require('./rooms/rooms.component');
 var new_user_component_1 = require('./new-user/new-user.component');
 var router_1 = require('@angular/router');
 var blog_component_1 = require('./blog/blog.component');
+var welcome_component_1 = require('./welcome/welcome.component');
 var router = [
     { path: '', component: new_user_component_1.NewUserComponent },
     { path: 'blog', component: blog_component_1.BlogComponent },
     { path: 'rooms/:specificRoom', component: blog_component_1.BlogComponent },
-    { path: 'rooms', component: rooms_component_1.RoomsComponent }
+    { path: 'rooms', component: rooms_component_1.RoomsComponent },
+    { path: 'welcome', component: welcome_component_1.WelcomeComponent }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -29,7 +31,8 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 rooms_component_1.RoomsComponent,
                 new_user_component_1.NewUserComponent,
-                blog_component_1.BlogComponent
+                blog_component_1.BlogComponent,
+                welcome_component_1.WelcomeComponent
             ],
             imports: [
                 router_1.RouterModule.forRoot(router, { useHash: true }),

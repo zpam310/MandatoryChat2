@@ -35,7 +35,7 @@ var NewUserComponent = (function () {
             _this.model = Newuser;
             _this.getNewUser();
         }, function (error) { return _this.title = error; });
-        this.router.navigate(["rooms"]);
+        this.router.navigate(["welcome"]);
     };
     NewUserComponent.prototype.resetModel = function (userModel, userModelUsername) {
         userModel = new new_user_1.NewUser(userModelUsername);

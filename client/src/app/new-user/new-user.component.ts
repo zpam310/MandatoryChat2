@@ -40,7 +40,8 @@ export class NewUserComponent implements OnInit {
             },
             error => this.title = <any>error
         );
-    this.router.navigate(["rooms"])
+      this.router.navigate(["welcome"]);
+
   }
 
   resetModel(userModel, userModelUsername) {
