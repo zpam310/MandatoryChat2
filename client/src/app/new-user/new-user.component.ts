@@ -17,7 +17,16 @@ export class NewUserComponent implements OnInit {
   title = 'MEAN app with Angular2';
   model = new NewUser("");
 
+<<<<<<< HEAD
   constructor (private service: NewUserService, private route: ActivatedRoute, private router: Router) {}
+=======
+  constructor (
+      private route: ActivatedRoute,
+      private router: Router,
+      private service: NewUserService
+  ) {}
+
+>>>>>>> origin/master
 
   getNewUser() {
     this.service.getNewUser()
@@ -31,7 +40,6 @@ export class NewUserComponent implements OnInit {
     return this.users;
   }
   addNewUser() {
-    //this.resetModel(this.model, this.model.username);
     this.service.addNewUser(this.model)
         .subscribe(
             Newuser => {
@@ -40,12 +48,16 @@ export class NewUserComponent implements OnInit {
             },
             error => this.title = <any>error
         );
+<<<<<<< HEAD
     this.router.navigate(["rooms"])
   }
 
   resetModel(userModel, userModelUsername) {
     userModel = new NewUser(userModelUsername)
     this.model = userModel
+=======
+    //this.router.navigate(['rooms', NewUser]);
+>>>>>>> origin/master
   }
 
 

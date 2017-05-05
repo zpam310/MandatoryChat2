@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
 import { Blog } from './blog';
 import { Http, Response } from '@angular/http';
 import '../rxjs-operators';
@@ -11,7 +11,10 @@ import { Router, ActivatedRoute, Params} from '@angular/router'
   styleUrls: ['./blog.component.css'],
   providers: [BlogService]
 })
-export class BlogComponent implements OnInit{
+export class BlogComponent implements OnInit, AfterViewChecked {
+
+    @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+
   title = 'MEAN app with Angular2';
   model = new Blog("", "", "");
   specificRoom: string;
@@ -20,6 +23,16 @@ export class BlogComponent implements OnInit{
   constructor (private http: Http,
                private service: BlogService,
                private route: ActivatedRoute) {}
+
+   ngAfterViewChecked() {
+        this.scrollToBottom();
+    }
+
+    scrollToBottom(): void {
+        try {
+            this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+        } catch(err) { }
+    }
 
   submitBlog() {
 
