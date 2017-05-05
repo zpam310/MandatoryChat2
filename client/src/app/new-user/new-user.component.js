@@ -27,22 +27,6 @@ var NewUserComponent = (function () {
         }, function (error) { return _this.users = error; });
         return this.users;
     };
-    // addNewUser() {
-    //     console.log("start addnewuser");
-    //   //this.resetModel(this.model, this.model.username);
-    //   this.service.addNewUser(this.model)
-    //       .subscribe(
-    //           Newuser => {
-    //             this.model = Newuser;
-    //               console.log("NEWUSER" + this.model);
-    //               this.getNewUser();
-    //             console.log("subscribe" + this.getNewUser());
-    //           },
-    //           error => this.title = <any>error
-    //       );
-    //     this.router.navigate(["welcome"]);
-    //
-    // }
     NewUserComponent.prototype.loginUser = function (username) {
         var _this = this;
         console.log("Loginuser -1");

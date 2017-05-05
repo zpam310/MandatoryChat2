@@ -18,7 +18,7 @@ var NewUserService = (function () {
         this.getNewUserUrl = '/new-user/get'; // URL to web API
         this.postNewUserUrl = '/new-user/post'; // URL to web API
         this.url = window.location.origin;
-        this.authenticateUserUrl = '/new-user/auth/';
+        this.authenticateUserUrl = '/new-user/login/';
     }
     /*
      * Get users from server

@@ -14,7 +14,7 @@ export class NewUserService {
     constructor (private http: Http) {}
     private socket;
     private url = window.location.origin;
-    private authenticateUserUrl = '/new-user/auth/';
+    private authenticateUserUrl = '/new-user/login/';
 
 
     /*

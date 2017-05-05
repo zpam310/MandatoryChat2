@@ -19,7 +19,7 @@ router.post ('/post', function (req, res, next) {
     });
 
 });
-router.post('/auth/user', function(req, res, next) {
+router.post('/login/user', function(req, res, next) {
     console.log("Hitting it")
     var username = req.body.username;
     UserSchema.User.find({ username: username }).exec(function (err, users) {
