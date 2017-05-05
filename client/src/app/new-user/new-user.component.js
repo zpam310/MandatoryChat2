@@ -27,15 +27,44 @@ var NewUserComponent = (function () {
         }, function (error) { return _this.users = error; });
         return this.users;
     };
-    NewUserComponent.prototype.addNewUser = function () {
+    // addNewUser() {
+    //     console.log("start addnewuser");
+    //   //this.resetModel(this.model, this.model.username);
+    //   this.service.addNewUser(this.model)
+    //       .subscribe(
+    //           Newuser => {
+    //             this.model = Newuser;
+    //               console.log("NEWUSER" + this.model);
+    //               this.getNewUser();
+    //             console.log("subscribe" + this.getNewUser());
+    //           },
+    //           error => this.title = <any>error
+    //       );
+    //     this.router.navigate(["welcome"]);
+    //
+    // }
+    NewUserComponent.prototype.loginUser = function (username) {
         var _this = this;
-        //this.resetModel(this.model, this.model.username);
-        this.service.addNewUser(this.model)
-            .subscribe(function (Newuser) {
-            _this.model = Newuser;
-            _this.getNewUser();
-        }, function (error) { return _this.title = error; });
-        this.router.navigate(["welcome"]);
+        console.log("Loginuser -1");
+        this.resetModel(this.model, this.model.username);
+        this.service.loginUser(username)
+            .subscribe(function (feedback) {
+            console.log("Loginuser -2");
+            if (feedback.length === 1) {
+                console.log("Loginuser -3");
+                _this.feedback = 'Username already in use';
+            }
+            else {
+                console.log("Loginuser -4");
+                _this.resetModel(_this.model, _this.model.username);
+                _this.service.addNewUser(_this.model)
+                    .subscribe(function (user) {
+                    _this.model = user;
+                    _this.getNewUser();
+                }, function (error) { return _this.title = error; });
+                _this.router.navigate(['welcome']);
+            }
+        });
     };
     NewUserComponent.prototype.resetModel = function (userModel, userModelUsername) {
         userModel = new new_user_1.NewUser(userModelUsername);

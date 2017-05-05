@@ -14,7 +14,7 @@ export class NewUserService {
     constructor (private http: Http) {}
     private socket;
     private url = window.location.origin;
-
+    private authenticateUserUrl = '/new-user/auth/';
 
 
     /*
@@ -47,6 +47,11 @@ export class NewUserService {
             .catch(this.handleError);
     }
 
+    loginUser(username): Observable<NewUser[]> {
+        return this.http.post(this.authenticateUserUrl + 'user', {username: username})
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     /*
      * Data handlers
      */

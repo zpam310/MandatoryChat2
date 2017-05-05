@@ -16,8 +16,10 @@ export class NewUserComponent implements OnInit {
   public userList = this.users;
   title = 'MEAN app with Angular2';
   model = new NewUser("");
+    feedback;
 
-  constructor (private service: NewUserService, private route: ActivatedRoute, private router: Router) {}
+
+    constructor (private service: NewUserService, private route: ActivatedRoute, private router: Router) {}
 
   getNewUser() {
     this.service.getNewUser()
@@ -30,19 +32,51 @@ export class NewUserComponent implements OnInit {
         );
     return this.users;
   }
-  addNewUser() {
-    //this.resetModel(this.model, this.model.username);
-    this.service.addNewUser(this.model)
-        .subscribe(
-            Newuser => {
-              this.model = Newuser;
-              this.getNewUser();
-            },
-            error => this.title = <any>error
-        );
-      this.router.navigate(["welcome"]);
+  // addNewUser() {
+  //     console.log("start addnewuser");
+  //   //this.resetModel(this.model, this.model.username);
+  //   this.service.addNewUser(this.model)
+  //       .subscribe(
+  //           Newuser => {
+  //             this.model = Newuser;
+  //               console.log("NEWUSER" + this.model);
+  //               this.getNewUser();
+  //             console.log("subscribe" + this.getNewUser());
+  //           },
+  //           error => this.title = <any>error
+  //       );
+  //     this.router.navigate(["welcome"]);
+  //
+  // }
 
-  }
+    loginUser(username) {
+        console.log("Loginuser -1");
+        this.resetModel(this.model, this.model.username);
+        this.service.loginUser(username)
+            .subscribe(
+                feedback => {
+                    console.log("Loginuser -2");
+
+                    if (feedback.length === 1) {
+                        console.log("Loginuser -3");
+                        this.feedback = 'Username already in use';
+                    } else {
+                        console.log("Loginuser -4");
+
+                        this.resetModel(this.model, this.model.username);
+                        this.service.addNewUser(this.model)
+                            .subscribe(
+                                user => {
+                                    this.model = user;
+                                    this.getNewUser();
+                                },
+                                error =>  this.title = <any>error
+                            );
+                        this.router.navigate(['welcome']);
+                    }
+                }
+            );
+    }
 
   resetModel(userModel, userModelUsername) {
     userModel = new NewUser(userModelUsername)

@@ -9,6 +9,7 @@ const UserSchema = require('../model/user.server.model');
 
 /* POST */
 router.post ('/post', function (req, res, next) {
+    console.log("Normal post")
     var instance = new UserSchema.User(req.body);
     req.session.username = req.body.username;
     instance.save(function (err, User) {
@@ -18,7 +19,16 @@ router.post ('/post', function (req, res, next) {
     });
 
 });
-
+router.post('/auth/user', function(req, res, next) {
+    console.log("Hitting it")
+    var username = req.body.username;
+    UserSchema.User.find({ username: username }).exec(function (err, users) {
+        if (err)
+            return console.error(err);
+        //console.log("Load success: ", users);
+        res.send(users);
+    });
+});
 /* GET */
 router.get ('/get', function (req, res, next) {
     UserSchema.User.find({}).exec(function (err, users) {
@@ -29,7 +39,7 @@ router.get ('/get', function (req, res, next) {
     });
 });
 
-/* Notify blog messages to connected clients */
+
 router.clients = [];
 router.addClient = function (client) {
     router.clients.push(client);

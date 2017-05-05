@@ -35,7 +35,6 @@ export class BlogComponent implements OnInit, AfterViewChecked {
     }
 
   submitBlog() {
-
       this.model = new Blog(this.model.username, this.model.msg, this.specificRoom);
       console.log(this.model);
        this.service.addBlog(this.model)

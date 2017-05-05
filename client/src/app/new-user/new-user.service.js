@@ -18,6 +18,7 @@ var NewUserService = (function () {
         this.getNewUserUrl = '/new-user/get'; // URL to web API
         this.postNewUserUrl = '/new-user/post'; // URL to web API
         this.url = window.location.origin;
+        this.authenticateUserUrl = '/new-user/auth/';
     }
     /*
      * Get users from server
@@ -46,6 +47,12 @@ var NewUserService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    NewUserService.prototype.loginUser = function (username) {
+        return this.http.post(this.authenticateUserUrl + 'user', { username: username })
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    ;
     /*
      * Data handlers
      */
