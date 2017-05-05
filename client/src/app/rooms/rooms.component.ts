@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RoomsService } from "./rooms.service";
 import { Rooms } from "./rooms";
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-rooms',
@@ -16,7 +17,9 @@ export class RoomsComponent implements OnInit {
   model = new Rooms("");
 
 
-  constructor (private service: RoomsService) {}
+  constructor (private route: ActivatedRoute,
+               private router: Router,
+               private service: RoomsService) {}
 
   getRooms() {
     this.service.getRooms()
@@ -31,7 +34,7 @@ export class RoomsComponent implements OnInit {
   }
 
   addRooms() {
-    this.resetModel(this.model, this.model.chatRoom);
+   // this.resetModel(this.model, this.model.chatRoom);
     this.service.addRooms(this.model)
         .subscribe(
             room => {
@@ -40,11 +43,6 @@ export class RoomsComponent implements OnInit {
             },
             error => this.title = <any>error
         );
-  }
-
-  resetModel(roomModel, roomModelChatRoom) {
-    roomModel = new Rooms(roomModelChatRoom)
-    this.model = roomModel
   }
 
   ngOnInit() {
